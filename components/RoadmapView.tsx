@@ -25,9 +25,10 @@ interface RoadmapViewProps {
         edges: RoadmapEdge[];
     };
     onNodeClick?: (node: RoadmapNode) => void;
+    onBack?: () => void;
 }
 
-const RoadmapView: React.FC<RoadmapViewProps> = ({ data, onNodeClick }) => {
+const RoadmapView: React.FC<RoadmapViewProps> = ({ data, onNodeClick, onBack }) => {
     if (!data || !data.nodes) return <div className="p-10 text-center text-slate-400 font-black uppercase tracking-widest text-[10px]">No roadmap data available</div>;
 
     const { nodes, edges } = data;
@@ -78,6 +79,20 @@ const RoadmapView: React.FC<RoadmapViewProps> = ({ data, onNodeClick }) => {
 
     return (
         <div className="relative w-full overflow-x-auto overflow-y-hidden no-scrollbar" style={{ height: `${height}px`, minHeight: '600px' }}>
+            {/* Absolute Back Button Overlay so it's always accessible even when panning */}
+            {onBack && (
+                <div className="absolute top-4 left-4 z-50 sticky-back-layer">
+                    <button
+                        onClick={onBack}
+                        className="flex items-center justify-center w-10 h-10 bg-white/90 backdrop-blur-md border border-slate-200 shadow-lg rounded-full text-slate-700 active:scale-90 transition-all"
+                    >
+                        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                        </svg>
+                    </button>
+                </div>
+            )}
+
             <div style={{ width: requiredWidth, height: '100%', position: 'relative' }}>
 
                 {/* SVG Layer for Connections */}

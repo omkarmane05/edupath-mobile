@@ -18,6 +18,7 @@ import RoadmapView from './components/RoadmapView';
 import RoadmapDetailModal from './components/RoadmapDetailModal';
 import NotesSection from './components/NotesSection';
 import LabsSection from './components/LabsSection';
+import ProfileSection from './components/ProfileSection';
 import { useSwipeBack } from './hooks/useSwipeBack';
 import { RecentlyViewedItem } from './types';
 
@@ -299,7 +300,11 @@ const App: React.FC = () => {
                 </div>
               ) : (
                 <div className="animate-in fade-in duration-500">
-                  <RoadmapView data={roadmap} onNodeClick={handleNodeClick} />
+                  <RoadmapView
+                    data={roadmap}
+                    onNodeClick={handleNodeClick}
+                    onBack={() => { setSelectedRole(null); setRoadmap(null); }}
+                  />
                 </div>
               )}
 
@@ -864,6 +869,9 @@ const App: React.FC = () => {
           </div>
         );
 
+      case 'profile':
+        return <ProfileSection />;
+
       default:
         return null;
     }
@@ -871,9 +879,6 @@ const App: React.FC = () => {
 
   return (
     <div className="h-full flex flex-col bg-[#F8FAFC]">
-      <div className="bg-amber-100 text-amber-800 text-[10px] font-black uppercase tracking-widest text-center py-1 border-b border-amber-200">
-        ⚠️ Development Mode • Localhost Only
-      </div>
       {/* Mobile Top Navigation */}
       {/* Mobile Top Navigation - Optimized: Removed heavy blur */}
       <nav className="shrink-0 bg-white/95 border-b border-slate-100 px-6 h-20 flex items-center justify-between safe-top z-50">
@@ -886,10 +891,15 @@ const App: React.FC = () => {
             <span className="text-[8px] font-black text-blue-600 uppercase tracking-[0.3em] mt-1">Global Student</span>
           </div>
         </div>
-        <button onClick={() => setCurrentTab('updates')} className="relative w-10 h-10 bg-slate-50 border border-slate-100 rounded-xl flex items-center justify-center active:bg-slate-100 transition-colors">
-          <Bell className="w-5 h-5 text-slate-400" />
-          <span className="absolute top-2 right-2 w-2.5 h-2.5 bg-red-500 rounded-full border-2 border-white shadow-sm"></span>
-        </button>
+        <div className="flex items-center gap-2">
+          <button onClick={() => setCurrentTab('profile')} className="w-10 h-10 bg-slate-50 border border-slate-100 rounded-full flex items-center justify-center active:bg-slate-100 transition-colors overflow-hidden">
+            <img src={`https://api.dicebear.com/7.x/notionists/svg?seed=${user?.email || 'student'}&backgroundColor=e2e8f0`} alt="Avatar" className="w-full h-full object-cover" />
+          </button>
+          <button onClick={() => setCurrentTab('updates')} className="relative w-10 h-10 bg-slate-50 border border-slate-100 rounded-xl flex items-center justify-center active:bg-slate-100 transition-colors">
+            <Bell className="w-5 h-5 text-slate-400" />
+            <span className="absolute top-2 right-2 w-2.5 h-2.5 bg-red-500 rounded-full border-2 border-white shadow-sm"></span>
+          </button>
+        </div>
       </nav>
 
       {/* Scrollable Content Container */}
