@@ -1,0 +1,27 @@
+graph TD
+    Student((Student))
+    Admin((College Admin))
+    subgraph Frontend ["EduPath Frontend (React/Vite)"]
+        UI[User Interface]
+        State[Local App State]
+        AuthUI[Login Screen]
+    end
+    subgraph Backend ["Backend Proxy (Netlify Functions)"]
+        AIProxy[Gemini API Proxy]
+    end
+    subgraph External ["External APIs/Databases"]
+        Supabase[(Supabase DB & Auth)]
+        Gemini[Google Gemini API]
+        NewsAPI[RSS/News Feeds]
+    end
+    Student <-->|Interacts| UI
+    Admin -->|Updates Content| Supabase
+    UI <-->|Reads/Writes Data| State
+    AuthUI -->|Authenticates| Supabase
+    UI -->|Requests AI Generation| AIProxy
+    AIProxy -->|Secured Request| Gemini
+    Gemini -->|Returns Content| AIProxy
+    AIProxy -->|Serves to Client| UI
+    UI -->|Saves Progress/Notes| Supabase
+    Supabase -->|Fetches User Data| UI
+    NewsAPI -->|Fetches Live Updates| UI

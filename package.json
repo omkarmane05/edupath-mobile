@@ -1,0 +1,32 @@
+{
+  "name": "edupath-mobile",
+  "version": "1.0.0",
+  "main": "index.tsx",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@google/genai": "^1.35.0",
+    "@supabase/supabase-js": "^2.91.1",
+    "expo": "~54.0.0",
+    "expo-status-bar": "~2.0.1",
+    "firebase": "^10.8.0",
+    "lucide-react": "^0.563.0",
+    "lucide-react-native": "^0.378.0",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "react-native": "0.77.0",
+    "react-native-web": "~0.19.13"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.20.0",
+    "@types/react": "~18.3.12",
+    "@types/react-native": "0.72.8",
+    "@vitejs/plugin-react": "^5.1.2",
+    "typescript": "~5.9.2",
+    "vite": "^7.3.1"
+  },
+  "private": true
+}

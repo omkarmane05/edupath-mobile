@@ -1,0 +1,28 @@
+graph LR
+    User((User))
+    GeminiAPI[Gemini AI]
+    LS[(Local Storage <br> MVP Only)]
+    Supa[(Supabase DB <br> Proposed)]
+    P1(1.0 Auth Process)
+    P2(2.0 Roadmap Generation)
+    P3(3.0 Progress Tracking)
+    P4(4.0 Lab Evaluation)
+    P5(5.0 Chat/Doubt Clearing)
+    User -->|Credentials| P1
+    P1 -->|Tokens| User
+    P1 -->|User Profile| Supa
+    User -->|Selects Domain| P2
+    P2 -->|Prompt Topic| GeminiAPI
+    GeminiAPI -->|JSON Graph Data| P2
+    P2 -->|Displays Roadmap| User
+    User -->|Click Checkbox| P3
+    P3 -->|Update state| LS
+    P3 -.->|Save completed nodes| Supa
+    User -->|Submit Code| P4
+    P4 -->|Run Auto-Grading Checks| P4
+    P4 -->|Update Score| LS
+    P4 -.->|Save XP| Supa
+    User -->|Ask Question| P5
+    P5 -->|Query Context| GeminiAPI
+    GeminiAPI -->|Answer| P5
+    P5 -->|Render Response| User

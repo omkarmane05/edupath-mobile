@@ -1,0 +1,23 @@
+
+{
+  "expo": {
+    "name": "EduPath",
+    "slug": "edupath-student",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.edupath.student"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#ffffff"
+      },
+      "package": "com.edupath.student"
+    }
+  }
+}

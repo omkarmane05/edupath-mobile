@@ -1,0 +1,12 @@
+{
+  "name": "EduPath Mobile",
+  "short_name": "EduPath",
+  "description": "Mobile-native student career navigator with AI roadmaps and Tinder-style matching.",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#2563eb",
+  "theme_color": "#2563eb",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}

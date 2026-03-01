@@ -1,0 +1,16 @@
+flowchart TD
+    A[Student Browser] -->|Requests AI Response| B(Netlify Edge Function)
+    
+    subgraph Security Layer
+        B -->|Checks CORS Origins| C{Is edupath.com?}
+        C -->|No| D[Drop Request 403 Forbidden]
+        C -->|Yes| E[Inject Secret Gemini Key]
+    end
+    
+    E -->|Secure API Call| F((Google Gemini))
+    
+    A -->|Submits JS Lab Code| G(Sandboxed iframe)
+    subgraph Browser Security
+        G -.->|Cannot Access| H[window.localStorage]
+        G -.->|Cannot Access| I[Parent DOM]
+    end

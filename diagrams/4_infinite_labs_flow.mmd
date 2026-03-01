@@ -1,0 +1,29 @@
+sequenceDiagram
+    participant Student
+    participant ReactUI as EduPath App
+    participant Netlify as Backend Proxy
+    participant Gemini as Gemini AI API
+    participant DB as Supabase DB
+
+    Student->>ReactUI: Clicks "Generate Next Challenge"
+    ReactUI->>DB: Fetch student's past performance
+    DB-->>ReactUI: Returns completion stats & weak points
+    
+    ReactUI->>Netlify: Send context + generation request
+    Note over Netlify: Proxy hides API Key
+    
+    Netlify->>Gemini: Prompt: "Generate intermediate JS lab focused on Arrays"
+    Gemini-->>Netlify: Returns JSON (code, checks, description)
+    Netlify-->>ReactUI: Serves generated lab data
+    
+    ReactUI->>Student: Displays new Lab Editor
+    
+    Student->>ReactUI: Submits Code
+    ReactUI->>ReactUI: Runs sandboxed regex checks
+    
+    alt All Tests Pass
+        ReactUI->>Student: Shows success + awards XP
+        ReactUI->>DB: Saves generated lab completion
+    else Tests Fail
+        ReactUI->>Student: Shows error feedback
+    end
